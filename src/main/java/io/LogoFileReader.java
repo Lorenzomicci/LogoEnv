@@ -7,34 +7,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class LogoFileReader implements Reader {
+public class LogoFileReader implements FunctionalRead {
 
-    private List<String> lines = new ArrayList<>();
-
-    @Override
-    public List<String> read() {
-        String programPath = "D:\\Universita\\PA\\LogoEnvironment\\src\\main\\java\\files\\program.txt";
-        try (Stream<String> stream = Files.lines(Paths.get(programPath))) {
-
-            //1. convert all content to upper case
-            //2. convert it into a List
-            this.lines = stream
-                    .map(String::toUpperCase)
-                    .collect(Collectors.toList());
-
+    FunctionalRead funRead = path1 -> {
+        try {
+            return Files.lines(path1).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
+    };
 
-        return lines;
+    @Override
+    public List<String> apply(Path path) {
+        return funRead.apply(path);
     }
 
-    public static void main(String[] args){
-        LogoFileReader lfr = new LogoFileReader();
-        List<String> app = lfr.read();
-
-        app.forEach(System.out::println);
-    }
 }
