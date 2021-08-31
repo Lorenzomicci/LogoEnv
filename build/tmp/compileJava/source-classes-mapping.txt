@@ -1,0 +1,34 @@
+interpreter/RegularExpression.java
+ interpreter.RegularExpression
+view/LogoConsoleView.java
+ view.LogoConsoleView
+controller/TypeOfOperation.java
+ controller.TypeOfOperation
+view/View.java
+ view.View
+io/FunctionalRead.java
+ io.FunctionalRead
+controller/LogoController.java
+ controller.LogoController
+controller/Action.java
+ controller.Action
+compiler/Expression.java
+ compiler.Expression
+model/Model.java
+ model.Model
+controller/Controller.java
+ controller.Controller
+model/Orientation.java
+ model.Orientation
+model/Position.java
+ model.Position
+model/LogoCursorPosition.java
+ model.LogoCursorPosition
+model/LogoModel.java
+ model.LogoModel
+io/LogoFileReader.java
+ io.LogoFileReader
+model/Cursor.java
+ model.Cursor
+model/LogoCursor.java
+ model.LogoCursor
