@@ -1,4 +1,4 @@
-package controller;
+package interpreter;
 
 public enum TypeOfOperation {
     SETSCREENCOLOR,

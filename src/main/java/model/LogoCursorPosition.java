@@ -12,43 +12,47 @@ public class LogoCursorPosition implements Position {
     /*
     * Functions
     * */
+    /**
+     * Duo di funzioni di tipo <code>Function</code> per inizializzare i campi necessari alla posizione
+     */
     private final Function<Integer,Integer> setPositionX = x -> this.currentX = x;
 
     private final Function<Integer,Boolean> checkXPos = x -> x > 100;
 
-    private final Function<Integer, Boolean> setx = checkXPos.compose(setPositionX);
 
-
-
+    /**
+     * Inizializzazione di y
+      */
     private final Function<Integer,Integer> setPositionY = y -> this.currentY = y;
 
     private final Function<Integer,Boolean> checkYPos = y -> y > 100;
 
-    private final Function<Integer,Boolean> sety = checkYPos.compose(setPositionY);
 
-
-
+    /**
+     * Inizializzazione dell'orientamento
+     */
     private final Function<Orientation,Orientation> setOrientation = o -> this.currentOrientation = o;
 
     private final Function<Orientation,Boolean> checkOrientation = Objects::nonNull;
-
-    private final Function<Orientation,Boolean> setor = checkOrientation.compose(setOrientation);
 
     /***************************************************************/
 
     @Override
     public void setX(int x){
-        setx.apply(x);
+        if(checkXPos.apply(x))
+        setPositionX.apply(x);
     }
 
     @Override
     public void setY(int y){
-        sety.apply(y);
+        if(checkXPos.apply(y))
+        setPositionY.apply(y);
     }
 
     @Override
     public void setOrientation(Orientation o) {
-        setor.apply(o);
+        if(checkOrientation.apply(o))
+            setOrientation.apply(o);
     }
 
     @Override

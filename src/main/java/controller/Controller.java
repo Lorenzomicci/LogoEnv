@@ -1,10 +1,11 @@
 package controller;
 
-import compiler.Expression;
+import interpreter.RegularExpression;
+import interpreter.Action;
 
 public interface Controller {
-    Expression nextInstruction();
-    Expression prevInstruction();
+    RegularExpression nextInstruction();
+    RegularExpression prevInstruction();
     Action computeInstruction();
     void updateView();
 }
