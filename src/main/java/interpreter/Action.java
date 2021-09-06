@@ -1,5 +1,5 @@
 package interpreter;
 
 public interface Action {
-    RegularExpression actionType(String instruction);
+     RegularExpression actionType(String instruction);
 }

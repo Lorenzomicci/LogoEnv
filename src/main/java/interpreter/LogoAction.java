@@ -17,7 +17,7 @@ public class LogoAction implements Action {
             case "setpensize" -> new Setpensize();
             case "setscreencolor" -> new Setscreencolor();
             case "repeat" -> new Repeat();
-            default -> null;
+            default -> null; //TODO refactor per togliere null e usare gli optional
         };
 
     }
