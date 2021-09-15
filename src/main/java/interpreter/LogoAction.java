@@ -7,8 +7,10 @@ public class LogoAction implements Action {
     @Override
     public RegularExpression actionType(String instruction) {
 
-        return switch (instruction) {
-            case "forward" -> new Forward();
+        String[] parts = instruction.split(" ");
+
+        return switch (parts[0]) {
+            case "forward" -> new Forward(Integer.parseInt(parts[1]));
             case "backward" -> new BackWard();
             case "left" -> new Left();
             case "right" -> new Right();

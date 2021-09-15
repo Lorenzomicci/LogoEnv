@@ -4,6 +4,7 @@ import interpreter.LogoInterpreter;
 import interpreter.RegularExpression;
 import io.LogoFileReader;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
@@ -11,30 +12,51 @@ import java.util.function.Function;
 public class LogoModel implements Model {
 
     private final LogoFileReader logofilereader = new LogoFileReader();
-    List<String> instructions = new ArrayList<>();
-    Map<RegularExpression,Integer> currentInstruction = new HashMap<>();
-    Cursor cursorState;
-    LogoInterpreter interpreter = new LogoInterpreter();
-    private final int countInstruction = 0;
+    private List<String> instructions = new ArrayList<>();
+    private Map<RegularExpression,Integer> currentInstruction = new HashMap<>();
+    private Cursor cursorState;
+    private LogoInterpreter interpreter = new LogoInterpreter();
+    private static int countInstruction = 0;
 
-    public LogoModel() {
+    public LogoModel(String path) throws IOException {
+        this.cursorState = new LogoCursor();
+        readInstruction(path);
     }
 
-    Function<RegularExpression,Integer> addToMap = e -> this.currentInstruction.put(e,this.countInstruction + 1);
+    Function<RegularExpression,Integer> addToMap = e -> this.currentInstruction.put(e,LogoModel.countInstruction + 1);
 
-    public List<String> readInstruction(String path) {
-        return readLogoInstruction(path);
+    public List<String> getInstructions() {
+        return instructions;
     }
 
-    private List<String> readLogoInstruction(String path) {
+    public Map<RegularExpression, Integer> getCurrentInstruction() {
+        return currentInstruction;
+    }
+
+    public Cursor getCursorState() {
+        return cursorState;
+    }
+
+    public void readInstruction(String path) throws IOException {
+         readLogoInstruction(path);
+    }
+
+    private void readLogoInstruction(String path) throws IOException {
         this.instructions = logofilereader.apply(Paths.get(path));
         mapInstructions();
-        return logofilereader.apply(Paths.get(path));
+        logofilereader.apply(Paths.get(path));
     }
 
-    private void mapInstructions() {
-        interpreter.convertStringToExpressionp(this.instructions).parallelStream()
-                .map(e -> addToMap.apply(e));
+    private void mapInstructions() throws IOException {
+        interpreter.convertStringToExpressionp(this.instructions).forEach(e -> addToMap.apply(e));
+    }
+
+    public List<RegularExpression> mapString() throws IOException {
+        return mapStringToRegEx();
+    }
+
+    private List<RegularExpression> mapStringToRegEx() throws IOException {
+       return this.interpreter.convertStringToExpressionp(this.instructions);
     }
 
 }

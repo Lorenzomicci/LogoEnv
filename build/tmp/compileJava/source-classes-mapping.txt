@@ -1,34 +1,54 @@
-interpreter/RegularExpression.java
- interpreter.RegularExpression
-view/LogoConsoleView.java
- view.LogoConsoleView
-controller/TypeOfOperation.java
- controller.TypeOfOperation
-view/View.java
- view.View
-io/FunctionalRead.java
- io.FunctionalRead
-controller/LogoController.java
- controller.LogoController
-controller/Action.java
- controller.Action
-compiler/Expression.java
- compiler.Expression
-model/Model.java
- model.Model
-controller/Controller.java
- controller.Controller
-model/Orientation.java
- model.Orientation
 model/Position.java
  model.Position
-model/LogoCursorPosition.java
- model.LogoCursorPosition
-model/LogoModel.java
- model.LogoModel
+model/Orientation.java
+ model.Orientation
 io/LogoFileReader.java
  io.LogoFileReader
 model/Cursor.java
  model.Cursor
+io/FunctionalRead.java
+ io.FunctionalRead
+model/Model.java
+ model.Model
+interpreter/RegularExpression.java
+ interpreter.RegularExpression
+view/LogoConsoleView.java
+ view.LogoConsoleView
+commands/Setpensize.java
+ commands.Setpensize
+commands/Forward.java
+ commands.Forward
 model/LogoCursor.java
  model.LogoCursor
+interpreter/TypeOfOperation.java
+ interpreter.TypeOfOperation
+commands/Setfillcolor.java
+ commands.Setfillcolor
+commands/BackWard.java
+ commands.BackWard
+controller/Controller.java
+ controller.Controller
+commands/Setpencolor.java
+ commands.Setpencolor
+model/LogoCursorPosition.java
+ model.LogoCursorPosition
+interpreter/LogoAction.java
+ interpreter.LogoAction
+interpreter/Action.java
+ interpreter.Action
+view/View.java
+ view.View
+commands/Repeat.java
+ commands.Repeat
+commands/Setscreencolor.java
+ commands.Setscreencolor
+commands/Left.java
+ commands.Left
+commands/Right.java
+ commands.Right
+model/LogoModel.java
+ model.LogoModel
+controller/LogoController.java
+ controller.LogoController
+interpreter/LogoInterpreter.java
+ interpreter.LogoInterpreter
