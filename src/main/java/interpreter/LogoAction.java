@@ -1,25 +1,42 @@
 package interpreter;
 
 import commands.*;
+import model.LogoModel;
+import model.Model;
 
+import java.io.IOException;
+import java.util.Locale;
+
+/**
+ * @author Lorenzo Micci
+ * Il metodo actiontype serve per convertire una istruzione in formato testo
+ * in un oggetto corrispondente di tipo {@link RegularExpression}
+ */
 public class LogoAction implements Action {
 
+    /**
+     *
+     * @param instruction istruzione da convertire, viene utilizzato il metodo split per
+     *                    dividere l istruzione nella parte testuale e nella parate parametrica
+     *
+     * @return una {@link RegularExpression}
+     */
     @Override
-    public RegularExpression actionType(String instruction) {
+    public RegularExpression actionType(String instruction, LogoModel logoModel) throws IOException {
 
         String[] parts = instruction.split(" ");
 
-        return switch (parts[0]) {
-            case "forward" -> new Forward(Integer.parseInt(parts[1]));
-            case "backward" -> new BackWard();
-            case "left" -> new Left();
-            case "right" -> new Right();
-            case "setpencolor" -> new Setpencolor();
-            case "setfillcolor" -> new Setfillcolor();
-            case "setpensize" -> new Setpensize();
-            case "setscreencolor" -> new Setscreencolor();
-            case "repeat" -> new Repeat();
-            default -> null; //TODO refactor per togliere null e usare gli optional
+        return switch (parts[0].toLowerCase(Locale.ROOT)) {
+            case "forward" -> new Forward(Integer.parseInt(parts[1]),logoModel);
+            case "backward" -> new BackWard(Integer.parseInt(parts[1]),logoModel);
+            case "left" -> new Left(logoModel);
+            case "right" -> new Right(logoModel);
+            case "setpencolor" -> new Setpencolor(Integer.parseInt(parts[1]),Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),logoModel);
+            case "setfillcolor" -> new Setfillcolor(Integer.parseInt(parts[1]),Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),logoModel);
+            case "setpensize" -> new Setpensize(Integer.parseInt(parts[1]),logoModel);
+            case "setscreencolor" -> new Setscreencolor(Integer.parseInt(parts[1]),Integer.parseInt(parts[2]),Integer.parseInt(parts[3]),logoModel);
+            case "repeat" -> new Repeat(logoModel);
+            default -> null;
         };
 
     }

@@ -1,28 +1,44 @@
 package interpreter;
 
 import controller.LogoController;
+import model.LogoModel;
+import model.Model;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 import java.util.logging.FileHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * @author Lorenzo Micci
+ * Il LogoInterpreter si compone di due Funzioni convertStringToExpressionp e convertStringToExpression che
+ * servono per convertire le stringhe lette dal file delle istruzioni in {@link RegularExpression}
+ */
 public class LogoInterpreter {
 
-    LogoAction logoAction;
+    private LogoAction logoAction;
     private Action action;
+    private LogoModel logoModel;
     private static final Logger LOGGER = Logger.getLogger( LogoController.class.getName() );
 
-    Function<String,RegularExpression> transform = stringinstruction -> logoAction.actionType(stringinstruction);
+    public LogoInterpreter(LogoModel model) {
+        logoModel = model;
+    }
+
+    Function<String,RegularExpression> transform = stringinstruction -> {
+        try {
+            return logoAction.actionType(stringinstruction,this.logoModel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    };
 
     public List<RegularExpression> convertStringToExpressionp(List<String> instructions) throws IOException {
         FileHandler fileHandler = new FileHandler("src/main/java/interpreter/interpreter.log");
         LOGGER.addHandler(fileHandler);
-        //LOGGER.log(Level.INFO,instructions.parallelStream().forEach(System.out::println));
-        instructions.parallelStream().forEach(System.out::println);
         return convertStringToExpression(instructions);
     }
 
@@ -33,7 +49,6 @@ public class LogoInterpreter {
 
     public static void main(String[] args) {
 
-        LogoInterpreter li = new LogoInterpreter();
-
     }
+
 }

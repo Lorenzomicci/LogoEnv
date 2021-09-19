@@ -1,11 +1,13 @@
 package commands;
 
-import interpreter.Action;
 import interpreter.RegularExpression;
+import model.LogoModel;
 
 public class Repeat implements RegularExpression {
+    public Repeat(LogoModel logoModel) {
+    }
+
     @Override
-    public Action interprete() {
-        return null;
+    public void interprete() {
     }
 }

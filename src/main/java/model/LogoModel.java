@@ -9,13 +9,17 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 
+/**
+ * Il {@link LogoModel} serve per gestire lo stato del cursore e delle istruzioni
+ * surante la valutazione del programma LOGO
+ */
 public class LogoModel implements Model {
 
     private final LogoFileReader logofilereader = new LogoFileReader();
     private List<String> instructions = new ArrayList<>();
     private Map<RegularExpression,Integer> currentInstruction = new HashMap<>();
     private Cursor cursorState;
-    private LogoInterpreter interpreter = new LogoInterpreter();
+    private LogoInterpreter interpreter = new LogoInterpreter(this);
     private static int countInstruction = 0;
 
     public LogoModel(String path) throws IOException {
@@ -35,6 +39,10 @@ public class LogoModel implements Model {
 
     public Cursor getCursorState() {
         return cursorState;
+    }
+
+    public void setCursorPosition(int n) {
+        this.cursorState.getPosition().setY(n);
     }
 
     public void readInstruction(String path) throws IOException {

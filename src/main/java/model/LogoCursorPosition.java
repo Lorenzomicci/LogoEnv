@@ -15,7 +15,7 @@ public class LogoCursorPosition implements Position {
     /**
      * Duo di funzioni di tipo <code>Function</code> per inizializzare i campi necessari alla posizione
      */
-    private final Function<Integer,Integer> setPositionX = x -> this.currentX = x;
+    private final Function<Integer,Integer> setPositionX = x -> this.currentX += x;
 
     private final Function<Integer,Boolean> checkXPos = x -> x > 100;
 
@@ -23,7 +23,7 @@ public class LogoCursorPosition implements Position {
     /**
      * Inizializzazione di y
       */
-    private final Function<Integer,Integer> setPositionY = y -> this.currentY = y;
+    private final Function<Integer,Integer> setPositionY = y -> this.currentY += y;
 
     private final Function<Integer,Boolean> checkYPos = y -> y > 100;
 

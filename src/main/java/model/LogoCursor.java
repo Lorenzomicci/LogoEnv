@@ -10,7 +10,7 @@ public class LogoCursor implements Cursor {
         currentPos = new LogoCursorPosition();
     }
 
-    private Orientation retOr() {
+    public Orientation retOr() {
        return currentPos.getOrientation();
     }
 
@@ -25,5 +25,9 @@ public class LogoCursor implements Cursor {
     }
 
     public final Function<LogoCursor,Orientation> retOri = LogoCursor::retOr;
+
+    public static void main(String[] args) {
+
+    }
 
 }
